@@ -74,6 +74,10 @@ canvas.webgl-bg {
 .filter-buttons {
   text-align: center;
   margin-bottom: 2rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 1rem;
+  scrollbar-width: none; /* Firefox - hide scrollbar */
 }
 
 .filter-buttons button {
@@ -87,9 +91,31 @@ canvas.webgl-bg {
   transition: background-color 0.3s;
 }
 
-.filter-buttons button:hover {
-  background-color: #2f81f7;
+.filter-buttons::-webkit-scrollbar {
+  height: 8px;
+  background: transparent;
 }
+
+.filter-buttons:hover::-webkit-scrollbar {
+  background: rgba(0, 0, 0, 0.2); /* scrollbar track on hover */
+}
+
+.filter-buttons::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.filter-buttons:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3); /* scrollbar thumb on hover */
+}
+
+/* Optional: Firefox hover effect */
+.filter-buttons:hover {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+
+
 
 .projects {
   display: grid;
