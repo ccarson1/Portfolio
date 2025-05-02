@@ -1,22 +1,37 @@
-# Use official Python image
-FROM python:3.11-slim
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+FROM ubuntu:22.04
+
+# Set environment variables to prevent prompts during install
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system dependencies
+RUN apt update && apt install -y \
+    python3 \
+    python3-venv \
+    python3-pip \
+    git \
+    curl \
+    netcat \
+    && apt clean
 
 # Set working directory
-WORKDIR /app
+WORKDIR /portfolio
 
-# Install dependencies
-COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+# Clone the repository
+RUN git clone https://github.com/ccarson1/Portfolio.git /portfolio
 
-# Copy project files
-COPY . .
+# Create virtual environment and activate it
+RUN python3 -m venv venv
 
-# Collect static files (optional)
-RUN python manage.py collectstatic --noinput
+# Install dependencies from requirements.txt
+RUN /portfolio/venv/bin/pip install --upgrade pip && \
+    /portfolio/venv/bin/pip install -r requirements.txt
 
-# Run the application (you can override this with docker-compose or CMD)
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Expose Django's default port
+EXPOSE 8000
+
+# Set environment path to use virtualenv Python
+ENV PATH="/portfolio/venv/bin:$PATH"
+
+# Run the Django server
+CMD ["sh", "-c", "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"]
