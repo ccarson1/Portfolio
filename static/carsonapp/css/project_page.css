@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  header {
+    background-color: #0d1117;
+    color: #fff;
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    color: #bbb;
+  }
+
+
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f4f4f4;
+    padding: 12px 24px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
+  }
+
+  .nav-bar a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 16px;
+    font-weight: 500;
+  }
+
+  .nav-bar a:hover {
+    color: #007bff;
+  }
+
+  .nav-left a {
+    font-weight: bold;
+  }
+
+  .nav-right {
+    display: flex;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  h2.section-title {
+    font-size: 1.75rem;
+    color: #0d1117;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .doc-section {
+    margin-bottom: 2rem;
+  }
+
+  .doc-section p {
+    margin-bottom: 1rem;
+  }
+
+  code,
+  pre {
+    background-color: #eaeaea;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    font-family: monospace;
+    display: block;
+    overflow-x: auto;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #0d1117;
+    color: #ccc;
+    margin-top: 3rem;
+
+  }
+
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 2rem;
+    }
+
+    nav a {
+      display: inline-block;
+      margin: 0.5rem;
+    }
+  }

@@ -1,0 +1,41 @@
+[
+  {
+    "title": "Installing Hauppauge WinTV-HVR-1800 on a Linux Server",
+    "content": "<p>Installing Hauppauge WinTV-HVR-1800 on a Linux Server to stream channels to Jellyfin.<p>"
+  },
+  {
+    "title": "Getting Started",
+    "content": "<p>Install the card into an available PCI slot on the server</p>",
+    "id": "setup"
+  },
+  {
+    "title": "Hardware Installation",
+    "content": "<p>Boot the server, open a <em>Terminal</em> and run:</p><br><code>lspci | grep -i hauppauge</code><br><p>You should see output similar to <em>Multimedia video controller: Hauppauge device 8880 (rev xx)</em></p>",
+    "id": "install hardware"
+  },
+  {
+    "title": "Load the correct kernel modules",
+    "content": "<p>Check that the driver is loaded:</p><br><code>lsmod | grep cx23885</code><br><p>If not then load it:</p><code>sudo modprobe cx23885</code>",
+    "id": "load kernels"
+  },
+  {
+    "title": "Install the required firmware",
+    "content": "<code>wget https://www.linuxtv.org/downloads/firmware/dvb-fe-xc5000-1.6.114.fw</code><br><code>sudo cp dvb-fe-xc5000-1.6.114.fw /lib/firmware/</code>",
+    "id": "install firmware"
+  },
+  {
+    "title": "Verify",
+    "content": "<code>ls /dev/dvb/</code>",
+    "id": "verify"
+  },
+  {
+    "title": "Install TVHeadend",
+    "content": "<code>sudo apt install tvheadend</code><br><p>Test capture</p><code>ffmpeg -f video4linux2 -i /dev/video0 -t 10 output.mpg</code><br><p>Go to:</p><code>http://[your-server-ip]:9981</code>",
+    "id": "install firmware"
+  },
+  {
+    "title": "Connect to Jellyfin",
+    "content": "<p>Go to Dashboard > Live TV > Add tuner device.</p><br><p>Choose TVHeadend as the device type.</p><br><p>Set URL to:</p><br><code>http://[your-tvheadend-ip]:9981</code>",
+    "id": "install firmware"
+  }
+]

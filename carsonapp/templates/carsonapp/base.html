@@ -1,0 +1,74 @@
+{% load static %}
+
+
+
+<!-- Nav for large screens -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>My Portfolio</title>
+	<link rel="stylesheet" href="{% static 'carsonapp/css/base.css' %}">
+	
+	<script src="https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.min.js" defer></script>
+	<script src="https://threejs.org/examples/js/loaders/FontLoader.js" defer></script>
+	<script src="https://threejs.org/examples/js/geometries/TextGeometry.js" defer></script>
+	<script>
+		const textureUrl = "{% static 'carsonapp/images/header/particle.png' %}";
+	</script>
+	<script src="{% static 'carsonapp/js/header.js' %}" defer></script>
+	
+</head>
+
+<body>
+	<canvas class="webgl-bg"></canvas>
+	<header>
+		<h1>Craig Carson</h1>
+		<p>Software Engineer</p>
+		<img src="{% static 'carsonapp/images/bs.jpg' %}" alt="Craig Carson Profile Picture" class="profile-image" />
+	</header>
+
+	<nav style="background-color: #0d1117; padding: 1em;">
+		<ul style="list-style: none; display: flex; justify-content: center; gap: 2em; margin: 0; padding: 0;">
+			<li><a href="/" style="color: white; text-decoration: none;">Home</a></li>
+			<li><a href="{% url 'web-resume' %}" style="color: white; text-decoration: none;">Resume</a></li>
+			<li><a href="{% url 'web-about' %}" style="color: white; text-decoration: none;">About</a></li>
+		</ul>
+	</nav>
+
+	
+	<div id="main"></div>
+	<div id="base-container">
+		{% block content %}{% endblock %}
+	</div>
+
+	<footer>
+		<p>© 2025 Craig Carson. All rights reserved.</p>
+	</footer>
+
+	<script>
+
+		function getCookie(name) {
+			let cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+				const cookies = document.cookie.split(';');
+				for (let cookie of cookies) {
+					cookie = cookie.trim();
+					if (cookie.startsWith(name + '=')) {
+						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookieValue;
+		}
+
+		
+
+	</script>
+
+</body>
+
+</html>

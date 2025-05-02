@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentation - Project Name</title>
+  <link rel="stylesheet" href="{% static 'carsonapp/css/project_page.css' %}">
+</head>
+
+<body>
+
+  <script>
+
+  </script>
+
+  <header>
+    <h1>{{ project.title }}</h1>
+    <p>{{ project.description }}</p>
+  </header>
+
+  <nav class="nav-bar">
+    <div class="nav-left">
+      <a href="/">← Home</a>
+    </div>
+    <div class="nav-right">
+      {% for project in project_content %}
+      <a href="#{{ project.id }}">{{ project.title }}</a>
+      {% endfor %}
+    </div>
+  </nav>
+
+  <div class="container">
+    {% if project.image %}
+
+    <img src="{{ project.image.url }}" alt="{{ project.title }} image" style="max-width: 100%; height: auto;">
+    {% endif %}
+
+    {% for project in project_content %}
+      <section id="{{ project.id }}" class="doc-section">
+        <h2 class="section-title">{{ project.title }}</h2>
+        {{project.content|safe}}
+      </section>
+    {% endfor %}
+  </div>
+
+    <footer>
+      <p>© 2025 Craig Carson. All rights reserved.</p>
+    </footer>
+
+  
+
+</body>
+
+</html>

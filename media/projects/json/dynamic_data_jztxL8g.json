@@ -1,0 +1,7 @@
+[
+  {
+    "title": "Initial Steps",
+    "content": "<p>Update ubuntu server</p><br><code>sudo apt update</code>",
+    "id": "Initial Steps"
+  }
+]

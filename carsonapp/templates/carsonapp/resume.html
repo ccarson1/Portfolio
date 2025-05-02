@@ -1,0 +1,9 @@
+{% extends "carsonapp/base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'carsonapp/css/resume.css' %}">
+<div class=pdf-container>
+	<iframe class="responsive-iframe" src="{% static 'carsonapp/images/Craig Carson Resume.pdf' %}" width="100%" height="auto"></iframe>
+</div>
+{% endblock content %}

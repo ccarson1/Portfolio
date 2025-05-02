@@ -1,0 +1,149 @@
+{% extends "carsonapp/base.html" %}
+{% load static %}
+{% block content %}
+{% csrf_token %}
+<script src="{% static 'carsonapp/js/index.js' %}" defer></script>
+<div class="user-status" style="display: flex; padding: 1%;">
+  {% if user.is_authenticated %}
+  <p style="padding: .5%;">Welcome, {{ user.username }}!</p>
+  <form action="{% url 'logout' %}" method="post" style="padding: .5%;">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+  </form>
+  <!-- Button to redirect to the upload page -->
+  <a href="{% url 'upload_project' %}" style="padding: .5%;">
+    <button type="button">Upload</button>
+  </a>
+  {% else %}
+  <p></p>
+  {% endif %}
+</div>
+
+<div class="container">
+  <h2 class="section-title">Projects</h2>
+
+  <div class="filter-buttons">
+    <button onclick="filterProjects('all')">All</button>
+    {% for p_type in project_types %}
+    
+    <button onclick='filterProjects("{{ p_type|escapejs }}")'>{{ p_type }}</button>
+
+    {% endfor %}
+  </div>
+
+  <div class="projects" id="projects">
+    {% for project in projects %}
+    <div class="project-card" data-category="{{ project.category|default:'uncategorized' }}" id="{{ project.id }}">
+      {% if project.image %}
+      <img src="{{ project.image.url }}" alt="{{ project.title }}" class="project-image" />
+      {% else %}
+      <img src="{% static 'carsonapp/images/default_project.png' %}" alt="Default Image" class="project-image" />
+      {% endif %}
+
+      <h3 class="project-title">{{ project.title }}</h3>
+      <p class="project-description">{{ project.description }}</p>
+      {% if user.is_authenticated %}
+      <a href="{% url 'edit_project' project.id %}" class="edit-button">Edit</a>
+      {% endif %}
+    </div>
+    {% empty %}
+    <p>No projects found.</p>
+    {% endfor %}
+  </div>
+
+  <!--
+    <div class="projects" id="projects">
+      <div class="project-card" data-category="games">
+        <img src="{% static 'carsonapp/images/projects/medieval_days.png' %}" alt="Medieval Days" class="project-image" />
+        <h3 class="project-title">Medieval Days</h3>
+        <p class="project-description">A 2D platformer game built using pygame.</p>
+      </div>
+
+       
+
+      
+
+      <div class="project-card" data-category="games">
+        <img src="samurai_arena.png" alt="Samurai Arena" class="project-image" />
+        <h3 class="project-title">Samurai Arena</h3>
+        <p class="project-description">A 2D fighting game built using pygame.</p>
+      </div>
+
+      <div class="project-card" data-category="web">
+        <img src="learnling.png" alt="Learnling" class="project-image" />
+        <h3 class="project-title">Learnling</h3>
+        <p class="project-description">Language learning site build with a Django backend.</p>
+      </div>
+
+      <div class="project-card" data-category="python">
+        <img src="images/ecommerce.jpg" alt="SpriteViewer" class="project-image" />
+        <h3 class="project-title">SpriteViewer</h3>
+        <p class="project-description">Python program to animate spritesheets.</p>
+      </div>
+
+      <div class="project-card" data-category="games">
+        <img src="palimora_image.png" alt="Palimora" class="project-image" />
+        <h3 class="project-title">Palimora</h3>
+        <p class="project-description">An Online RPG game built using pygame.</p>
+      </div>
+
+      <div class="project-card" data-category="games">
+        <img src="chess_game.png" alt="Chess Game" class="project-image" />
+        <h3 class="project-title">Chess Game</h3>
+        <p class="project-description">Chess game in HTML, CSS and Javascript.</p>
+      </div>
+
+      <div class="project-card" data-category="games">
+        <img src="rpg_game.png" alt="RPG Game" class="project-image" />
+        <h3 class="project-title">RPG Game</h3>
+        <p class="project-description">A turned base web game in HTML, CSS and Javascript.</p>
+      </div>
+
+      <div class="project-card" data-category="machine_learning">
+        <img src="lor.png" alt="LOR text prediction" class="project-image" />
+        <h3 class="project-title">LOR Text Prediction</h3>
+        <p class="project-description">Text generation model trained on the "Fellowship of the Ring" in the Lord of the rings series.</p>
+      </div>
+
+      <div class="project-card" data-category="tools">
+        <img src="audio_tuner.png" alt="Audio Tuner" class="project-image" />
+        <h3 class="project-title">Audio Tuner</h3>
+        <p class="project-description">A full-featured e-commerce website with cart, payment, and admin dashboard.</p>
+      </div>
+
+      <div class="project-card" data-category="games">
+        <img src="skeleton.png" alt="Skeleton Game" class="project-image" />
+        <h3 class="project-title">Skeleton Game</h3>
+        <p class="project-description">3D game built in Unity</p>
+      </div>
+
+      <div class="project-card" data-category="web">
+        <img src="hangingrockreview.png" alt="Hanging Rock Review" class="project-image" />
+        <h3 class="project-title">Hanging Rock Review</h3>
+        <p class="project-description">A website for a writing class.</p>
+      </div>
+
+      <div class="project-card" data-category="tools">
+        <img src="blendermotioncapture.png" alt="Blender Motion Capture" class="project-image" />
+        <h3 class="project-title">Blender Motion Capture</h3>
+        <p class="project-description">Python Scripts that captures human movement using OpenCV then applying captured movement to blender.</p>
+      </div>
+
+      <div class="project-card" data-category="desktop">
+        <img src="surveillance_software.png" alt="Surveillance Software" class="project-image" />
+        <h3 class="project-title">Surveillance Software</h3>
+        <p class="project-description">Simple python program to add security cameras to a windowed application.</p>
+      </div>
+
+      <div class="project-card" data-category="desktop">
+        <img src="surveillance_software.png" alt="Text Summarization" class="project-image" />
+        <h3 class="project-title">Text Summarization</h3>
+        <p class="project-description">A tensorflow model that summarizes text that is input into it.</p>
+      </div> 
+      </div>
+      -->
+
+
+</div>
+
+{% endblock content %}

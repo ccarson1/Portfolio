@@ -1,0 +1,9 @@
+# Virtual environments
+env/
+venv/
+ENV/
+VENV/
+.venv/
+.env/
+
+static/carsonapp/downloads/

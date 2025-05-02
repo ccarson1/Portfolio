@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Introduction",
+    "content": "<p>This is a simple 2d fighting game built with pygame. <p>"
+  },
+  {
+    "title": "Getting Started",
+    "content": "<p>To begin, clone the repository and install the dependencies:</p><pre><code>git clone https://github.com/ccarson1/MedDays.git<br>python3 -m venv env<br>env\\Scripts\\activate<br>pip install pygame</code></pre>",
+    "id": "setup"
+  },
+  {
+    "title": "Basic Usage",
+    "content": "<p>Navigate to:</p><pre><code>cd MedDays</code></pre><p>Start Game <code> python main.py</code></p>",
+    "id": "usage"
+  }
+]

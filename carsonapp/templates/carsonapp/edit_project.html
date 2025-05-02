@@ -1,0 +1,84 @@
+{% extends 'carsonapp/base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'carsonapp/css/spinner.css' %}">
+<script src="{% static 'carsonapp/js/spinner.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'carsonapp/css/edit_project.css' %}">
+{% block content %}
+  <h1>Edit Project</h1>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        
+        <!-- Display form errors -->
+        {% for field in form %}
+            <div class="error">{{ field.errors }}</div>
+        {% endfor %}
+        
+        <p>
+            <label for="id_title">Title:</label>
+            <input type="text" name="title" value="{{ project.title }}" maxlength="20" required id="id_title">
+        </p>
+    
+        <p>
+            <label for="id_description">Description:</label>
+            <input type="text" name="description" value="{{ project.description }}" maxlength="50" required id="id_description">
+        </p>
+    
+        <p>
+            <label for="id_video">Video:</label>
+            <input type="file" name="video" id="id_video">
+        </p>
+    
+        <p>
+            <label for="id_category">Category:</label>
+            {{ form.category }}
+        </p>
+    
+        <p>
+            <label for="id_image">Image:</label>
+            {% if project.image %}
+            Currently: <a href="{{ project.image.url }}">Current Image</a>
+            {% endif %}
+            <input type="checkbox" name="image-clear" id="image-clear_id">
+            <label for="image-clear_id">Clear</label><br>
+            Change: <input type="file" name="image" accept="image/*" id="id_image">
+        </p>
+    
+        <p>
+            <label for="id_date">Date:</label>
+            <input type="text" name="date" value="{{ project.date }}" required id="id_date">
+            <input type="hidden" name="initial-date" value="{{ project.date }}" id="initial-id_date">
+        </p>
+    
+        <p>
+            <label for="id_language">Language:</label>
+            <input type="text" name="language" value="{{ project.language }}" maxlength="50" id="id_language">
+        </p>
+    
+        <p>
+            <label for="id_github">Github:</label>
+            <input type="text" name="github" value="{{ project.github }}" maxlength="150" id="id_github">
+        </p>
+    
+        <p>
+            <label for="id_json_file">Json file:</label>
+            Currently: <a href="{{ project.json_file.url }}">Current JSON file</a><br>
+            <input type="checkbox" name="json_file-clear" id="json_file-clear_id">
+            <label for="json_file-clear_id">Clear</label><br>
+            Change:
+            <textarea name="json_file_content" id="json_file_content" rows="20" cols="100">{{ json_content }}</textarea>
+            <br>
+            <input type="file" name="json_file" id="id_json_file">
+        </p>
+    
+        <button type="submit">Save Changes</button>
+    </form>
+    
+    
+
+  <br>
+
+{% endblock %}

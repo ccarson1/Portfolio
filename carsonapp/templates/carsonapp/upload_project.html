@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Project</title>
+</head>
+
+<body>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 50%;
+            margin-left: 25%;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 2rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            /* Set width to 50% of the body */
+            max-width: 600px;
+            /* Optional: max width for large screens */
+            display: flex;
+            flex-direction: column;
+            /* Ensures elements inside stack vertically */
+            align-items: center;
+            /* Centers content horizontally */
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            width: 100%;
+            margin-bottom: 1rem;
+            /* Adds space between header and form */
+        }
+
+        form {
+            width: 100%;
+            /* Make sure form takes up full width of its container */
+        }
+
+        label {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+
+        input,
+        textarea,
+        select {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-top: 0.3rem;
+            width: 100%;
+            /* Ensures inputs take full width of the container */
+        }
+
+        button {
+            margin-top: 1.5rem;
+            padding: 0.7rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            /* Makes button as wide as the form */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .plus-button {
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .container {
+            border: 2px dashed #ccc;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .input-pair {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            width: 350px;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'carsonapp/css/spinner.css' %}">
+    <script src="{% static 'carsonapp/js/spinner.js' %}" defer></script>
+    <script src="{% static 'carsonapp/js/upload_project.js' %}" defer></script>
+    
+    <div id="spinner-overlay" class="overlay">
+        <div id="spinner-container" class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    <form method="post" enctype="multipart/form-data">
+        <h1>Upload a New Project</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="button"  id="add-container-btn" class="plus-button">+</button>
+        <div id="containers"></div>
+
+        <button type="submit">Upload</button>
+    </form>
+    {% else %}
+    <h1>Unauthorized!</h1>
+    {% endif %}
+</body>
+
+</html>
